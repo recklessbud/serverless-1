@@ -4,7 +4,7 @@ const { putDatabaseUrl } = require("../lib/secret");
 const args = process.argv.slice(2);
 
 if(args.length !== 2){
-    console.log('usage: tsx src/cli/putSecrets.js <stage> <dburl>')
+    console.log('usage: tsx src/cli/putSecret.js <stage> <dburl>')
     process.exit(1)
 }
 
