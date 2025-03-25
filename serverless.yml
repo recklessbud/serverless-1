@@ -34,6 +34,8 @@ custom:
       - AWS_SECRET_ACCESS_KEY
       - AWS_ACCESS_KEY_ID
       - DATABASE_URL
+  include:
+    - node_modules/dotenv/**
 
 plugins:
   - serverless-offline
