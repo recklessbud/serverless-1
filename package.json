@@ -1,0 +1,31 @@
+{
+  "name": "serverless-neom",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "serverless offline --stage dev",
+    "deploy": "serverless deploy --stage prod",
+    "remove:dev": "serverless remove --stage dev",
+    "remove:prod": "serverless remove --stage prod",
+    "info:dev": "serverless info --stage dev",
+    "info:prod": "serverless info --stage prod",
+    "generate": "drizzle-kit generate --config=drizzle.config.js",
+    "migrate": "tsx src/cli/migrations.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ssm": "^3.772.0",
+    "@neondatabase/serverless": "^0.10.4",
+    "drizzle-orm": "^0.41.0",
+    "express": "^4.19.2",
+    "serverless-http": "^3.2.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.30.5",
+    "nodemon": "^3.1.9",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^14.4.0",
+    "tsx": "^4.19.3"
+  }
+}

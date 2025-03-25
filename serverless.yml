@@ -1,0 +1,40 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: bureck
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: serverless-neom
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    STAGE: ${env:STAGE, 'prod'}
+    DEBUG: ${env:DEBUG, 0}
+    
+  iam:
+    role:
+      name: serverless-ssm-role
+      statements:
+        - Effect: Allow
+          Action:
+            - "ssm:DescribeParameters"
+            - "ssm:GetParameter"
+            - "ssm:GetParameterHistory"
+            - "ssm:GetParametersByPath"
+            - "ssm:GetParameters"
+          Resource: "*"
+functions:
+  api:
+    handler: src/handler.handler
+    events:
+      - httpApi: "*"
+custom:
+  dotenv:
+    exclude:
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_ACCESS_KEY_ID
+      - DATABASE_URL
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
