@@ -21,6 +21,8 @@ jobs:
       with:
         node-version: "20.11"
         cache: 'npm'
+    - name: Authenticate Serverless Framework
+      run: echo "SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}" >> $GITHUB_ENV
     - name: Install dependencies
       run: npm install --force
     - name: Deploy
