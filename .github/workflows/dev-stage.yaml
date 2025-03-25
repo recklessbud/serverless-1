@@ -1,8 +1,8 @@
 name: Deploy Dev Stage
 
 on:
-  # push:
-  #   branches: [ dev ]
+  push:
+    branches: [ dev ]
   workflow_dispatch:
 
 jobs:
@@ -24,9 +24,9 @@ jobs:
         node-version: "20.11"
         cache: 'npm'
     - name: Install dependencies
-      run: npm install
+      run: npm install --force
     - name: Install neonctl and tsx
-      run: npm install -g neonctl tsx
+      run: npm install -g neonctl tsx --force
     - name: Delete Previous Branch
       run: neonctl branches delete dev --api-key ${{ env.API_KEY }}
       continue-on-error: true
@@ -36,13 +36,15 @@ jobs:
       run: |
         export DB_URL=$(neonctl connection-string --branch dev --api-key ${{ env.API_KEY }})
         npx tsx src/cli/putSecret.js dev $DB_URL
+    - name: Authenticate Serverless Framework
+      run: echo "SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}" >> $GITHUB_ENV
     - name: Deploy dev stage
       run: |
-        npm run deploy-dev-stage
+        npm run deploy:dev
     - name: Dev Stage Pull Request
       run: |
         export PR_BRANCH=$(git branch --show-current)
         export DEFAULT_BRANCH=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
         echo "$PR_BRANCH and $DEFAULT_BRANCH"
-        export DEV_STAGE_INFO=$(npm run info-dev-stage)
+        export DEV_STAGE_INFO=$(npm run info-dev)
         gh pr create --title "Automated PR from Dev Stage" --body "$DEV_STAGE_INFO" --base $DEFAULT_BRANCH --head $PR_BRANCH --repo $GITHUB_REPOSITORY
