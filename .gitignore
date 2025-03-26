@@ -1,7 +1,6 @@
 node_modules
 .serverless
 .env*
-policy.json
 .env
 undefined
 .gitignore
