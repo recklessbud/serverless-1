@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: npm install --force --legacy-peer-deps
     - name: Install neonctl, serverless and tsx
-      run: npm install -g neonctl serverless tsx --force --legacy-peer-deps
+      run: npm install -g neonctl serverless@latest tsx --force --legacy-peer-deps
     - name: Branch Connection String in Parameter Store
       run: |
         export DB_URL=$(neonctl connection-string --branch dev --api-key ${{ env.API_KEY }})
