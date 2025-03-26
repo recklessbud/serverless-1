@@ -22,9 +22,11 @@ jobs:
       with:
         node-version: "20.11"
         cache: 'npm'
+    - name: Install serverless
+      run: npm install -g serverless --force --legacy-peer-deps
     - name: Authenticate Serverless Framework
       run: echo "SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}" >> $GITHUB_ENV
     - name: Install dependencies
-      run: npm install --force
+      run: npm install --force --legacy-peer-deps
     - name: Deploy
       run: npm run deploy
