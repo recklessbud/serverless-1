@@ -14,20 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
  
-
-app.get("/",  async (req, res, next) => {
-  // console.log(DATABASE_URL)
-  const sql = await getdbClient()
-  const now = Date.now();
-  const [results] = await sql`select now();`
-  const delta = (results.now.getTime() - now) / 1000
-  return res.status(200).json({
-    message: "Hello from root!",
-    results: delta
-  });
-});
-
-
 app.get("/leads", async(req, res, next) => {
   try {
   const results = await getLeads();

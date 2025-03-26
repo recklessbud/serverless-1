@@ -33,6 +33,9 @@ jobs:
         npx tsx src/cli/putSecret.js dev $DB_URL
     - name: Authenticate Serverless Framework
       run: echo "SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}" >> $GITHUB_ENV
+    - name: Remove dev stage
+      run: |
+        npm run remove:dev
     - name: Deploy dev stage
       run: |
         npm run deploy:dev
