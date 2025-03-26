@@ -23,6 +23,8 @@ jobs:
       with:
         node-version: "20.11"
         cache: 'npm'
+    - name: Install vercel
+      run: npm install -g vercel@latest
     - name: Install dependencies
       run: npm install --force
     - name: Install neonctl and tsx
