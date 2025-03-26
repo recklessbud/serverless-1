@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
  
-app.get("/leads", async(req, res, next) => {
+app.get("/api/leads", async(req, res, next) => {
   try {
   const results = await getLeads();
   return res.status(200).json({
@@ -28,7 +28,7 @@ app.get("/leads", async(req, res, next) => {
 
 });
 
-app.post("/leads", async(req, res, next) => {
+app.post("/api/leads", async(req, res, next) => {
   const postData =  req.body
   const {data, hasError, message} = await validate(postData)
   if(hasError === true){
@@ -48,7 +48,7 @@ app.post("/leads", async(req, res, next) => {
   });
 });
 
-app.put("/leads/:id", async(req, res, next) => {
+app.put("/api/leads/:id", async(req, res, next) => {
   const { id } = req.params
    try {
     const {email, name} = req.body
