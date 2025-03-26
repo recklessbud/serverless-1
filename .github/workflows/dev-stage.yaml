@@ -23,10 +23,12 @@ jobs:
       with:
         node-version: "20.11"
         cache: 'npm'
+    - name: clean Cache
+      run: npm cache clean --force
     - name: Install dependencies
-      run: npm install --force --legacy-peer-deps
+      run: npm install --legacy-peer-deps
     - name: Install neonctl, serverless and tsx
-      run: npm install -g neonctl serverless@3.x tsx --force --legacy-peer-deps
+      run: npm install -g neonctl serverless@3.38.0 tsx --legacy-peer-deps
     - name: Branch Connection String in Parameter Store
       run: |
         export DB_URL=$(neonctl connection-string --branch dev --api-key ${{ env.API_KEY }})
