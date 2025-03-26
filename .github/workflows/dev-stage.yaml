@@ -23,10 +23,8 @@ jobs:
       with:
         node-version: "20.11"
         cache: 'npm'
-    - name: Install vercel
-      run: npm install -g vercel@latest
     - name: Install dependencies
-      run: npm install --force
+      run: npm install --force --legacy-peer-deps
     - name: Install neonctl and tsx
       run: npm install -g neonctl tsx --force
     - name: Branch Connection String in Parameter Store
@@ -38,6 +36,9 @@ jobs:
     - name: Remove dev stage
       run: |
         npm run remove:dev
+    - name: Remove prod stage
+      run: |
+        npm run remove:prod
     - name: Deploy dev stage
       run: |
         npm run deploy:dev
