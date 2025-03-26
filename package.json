@@ -11,7 +11,8 @@
     "info:dev": "serverless info --stage dev",
     "info:prod": "serverless info --stage prod",
     "generate": "drizzle-kit generate --config=drizzle.config.js",
-    "migrate": "tsx src/cli/migrations.js"
+    "migrate": "tsx src/cli/migrations.js",
+    "vercel-build": "echo 'hello'"
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.772.0",
