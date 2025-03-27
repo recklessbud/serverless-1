@@ -1,4 +1,5 @@
-import {app} from '../src/handler'
+import { app } from "../src/handler"
+
 
 
 export default app
